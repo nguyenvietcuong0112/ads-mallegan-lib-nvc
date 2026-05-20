@@ -5,6 +5,8 @@ plugins {
 }
 
 def libVersion = "1.0.0"
+group = findProperty('malleganAdsLibGroupId') ?: 'com.github.nguyenvietcuong0112'
+version = findProperty('malleganAdsLibVersion') ?: libVersion
 
 android {
     namespace 'com.mallegan.ads'
@@ -71,9 +73,9 @@ afterEvaluate {
         publications {
             MalleganAdsRelease(MavenPublication) {
                 from components.release
-                groupId = findProperty('malleganAdsLibGroupId') ?: 'com.github.libads'
+                groupId = project.group.toString()
                 artifactId = findProperty('malleganAdsLibArtifactId') ?: 'ads-mallegan-lib-nvc'
-                version = findProperty('malleganAdsLibVersion') ?: libVersion
+                version = project.version.toString()
 
                 pom {
                     name.set('Mallegan Ads SDK (local)')
