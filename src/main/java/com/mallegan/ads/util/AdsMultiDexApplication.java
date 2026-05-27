@@ -17,7 +17,7 @@ public abstract class AdsMultiDexApplication extends MultiDexApplication {
             AppOpenManager.getInstance().init(this, getOpenAppAdId());
         }
         if (enableAdjustTracking()) {
-            Adjust.getInstance().init(this, getAdjustToken());
+            AdjustHelper.INSTANCE.init(this, getAdjustToken(), null, buildDebug());
         }
     }
 

@@ -17,7 +17,7 @@ public abstract class AdsApplication extends Application {
             AppOpenManager.getInstance().init(this, getResumeAdId());
         }
         if (enableAdjustTracking()) {
-            Adjust.getInstance().init(this, getAdjustToken());
+            AdjustHelper.INSTANCE.init(this, getAdjustToken(), null, buildDebug());
         }
 
     }

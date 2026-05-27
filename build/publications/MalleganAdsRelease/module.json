@@ -1,0 +1,283 @@
+{
+  "formatVersion": "1.1",
+  "component": {
+    "group": "com.github.nguyenvietcuong0112",
+    "module": "ads-mallegan-lib-nvc",
+    "version": "1.0.0",
+    "attributes": {
+      "org.gradle.status": "release"
+    }
+  },
+  "createdBy": {
+    "gradle": {
+      "version": "9.0.0"
+    }
+  },
+  "variants": [
+    {
+      "name": "releaseVariantReleaseApiPublication",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.libraryelements": "aar",
+        "org.gradle.usage": "java-api"
+      },
+      "dependencies": [
+        {
+          "group": "com.android.billingclient",
+          "module": "billing",
+          "version": {
+            "requires": "7.1.1"
+          }
+        },
+        {
+          "group": "com.google.android.gms",
+          "module": "play-services-ads",
+          "version": {
+            "requires": "24.5.0"
+          }
+        },
+        {
+          "group": "androidx.databinding",
+          "module": "viewbinding",
+          "version": {
+            "requires": "8.7.3"
+          }
+        },
+        {
+          "group": "org.jetbrains.kotlin",
+          "module": "kotlin-stdlib",
+          "version": {
+            "requires": "2.2.0"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "ads-mallegan-lib-nvc-1.0.0.aar",
+          "url": "ads-mallegan-lib-nvc-1.0.0.aar",
+          "size": 207761,
+          "sha512": "b90c0f8714a093c348a990a60df22f6ce606c89390902a0f519a2172771e9dd1b9b26027202d4c7444dc07fee68ec4ac918774aae4fde39a5a68d2207dbed515",
+          "sha256": "94ce2dd622f1af921a88454f8a962e3db08af7107364321e91eb5a2cdffa85dc",
+          "sha1": "de47964fb194bfee993fa0110b68cff06fa29261",
+          "md5": "9d71f42dec6b4fdb1d2ce0aa5c97bc71"
+        }
+      ]
+    },
+    {
+      "name": "releaseVariantReleaseRuntimePublication",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.libraryelements": "aar",
+        "org.gradle.usage": "java-runtime"
+      },
+      "dependencies": [
+        {
+          "group": "androidx.core",
+          "module": "core-ktx",
+          "version": {
+            "requires": "1.15.0"
+          }
+        },
+        {
+          "group": "androidx.appcompat",
+          "module": "appcompat",
+          "version": {
+            "requires": "1.7.0"
+          }
+        },
+        {
+          "group": "androidx.constraintlayout",
+          "module": "constraintlayout",
+          "version": {
+            "requires": "2.2.0"
+          }
+        },
+        {
+          "group": "com.google.android.material",
+          "module": "material",
+          "version": {
+            "requires": "1.12.0"
+          }
+        },
+        {
+          "group": "androidx.recyclerview",
+          "module": "recyclerview",
+          "version": {
+            "requires": "1.3.2"
+          }
+        },
+        {
+          "group": "androidx.cardview",
+          "module": "cardview",
+          "version": {
+            "requires": "1.0.0"
+          }
+        },
+        {
+          "group": "com.facebook.shimmer",
+          "module": "shimmer",
+          "version": {
+            "requires": "0.5.0"
+          }
+        },
+        {
+          "group": "com.intuit.sdp",
+          "module": "sdp-android",
+          "version": {
+            "requires": "1.1.0"
+          }
+        },
+        {
+          "group": "androidx.lifecycle",
+          "module": "lifecycle-process",
+          "version": {
+            "requires": "2.8.7"
+          }
+        },
+        {
+          "group": "androidx.multidex",
+          "module": "multidex",
+          "version": {
+            "requires": "2.0.1"
+          }
+        },
+        {
+          "group": "androidx.preference",
+          "module": "preference",
+          "version": {
+            "requires": "1.2.1"
+          }
+        },
+        {
+          "group": "com.google.android.ump",
+          "module": "user-messaging-platform",
+          "version": {
+            "requires": "4.0.0"
+          }
+        },
+        {
+          "group": "com.google.ads.mediation",
+          "module": "facebook",
+          "version": {
+            "requires": "6.21.0.3"
+          }
+        },
+        {
+          "group": "com.google.code.gson",
+          "module": "gson",
+          "version": {
+            "requires": "2.10.1"
+          }
+        },
+        {
+          "group": "com.google.guava",
+          "module": "guava",
+          "version": {
+            "requires": "33.1.0-android"
+          }
+        },
+        {
+          "group": "com.facebook.android",
+          "module": "facebook-android-sdk",
+          "version": {
+            "requires": "18.2.3"
+          }
+        },
+        {
+          "group": "com.airbnb.android",
+          "module": "lottie",
+          "version": {
+            "requires": "6.7.1"
+          }
+        },
+        {
+          "group": "com.appsflyer",
+          "module": "af-android-sdk",
+          "version": {
+            "requires": "6.18.0"
+          }
+        },
+        {
+          "group": "com.google.firebase",
+          "module": "firebase-bom",
+          "version": {
+            "requires": "34.13.0"
+          },
+          "attributes": {
+            "org.gradle.category": "platform"
+          },
+          "endorseStrictVersions": true
+        },
+        {
+          "group": "com.google.firebase",
+          "module": "firebase-analytics"
+        },
+        {
+          "group": "com.google.firebase",
+          "module": "firebase-config"
+        },
+        {
+          "group": "com.android.billingclient",
+          "module": "billing",
+          "version": {
+            "requires": "7.1.1"
+          }
+        },
+        {
+          "group": "com.google.android.gms",
+          "module": "play-services-ads",
+          "version": {
+            "requires": "24.5.0"
+          }
+        },
+        {
+          "group": "androidx.databinding",
+          "module": "viewbinding",
+          "version": {
+            "requires": "8.7.3"
+          }
+        },
+        {
+          "group": "org.jetbrains.kotlin",
+          "module": "kotlin-stdlib",
+          "version": {
+            "requires": "2.2.0"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "ads-mallegan-lib-nvc-1.0.0.aar",
+          "url": "ads-mallegan-lib-nvc-1.0.0.aar",
+          "size": 207761,
+          "sha512": "b90c0f8714a093c348a990a60df22f6ce606c89390902a0f519a2172771e9dd1b9b26027202d4c7444dc07fee68ec4ac918774aae4fde39a5a68d2207dbed515",
+          "sha256": "94ce2dd622f1af921a88454f8a962e3db08af7107364321e91eb5a2cdffa85dc",
+          "sha1": "de47964fb194bfee993fa0110b68cff06fa29261",
+          "md5": "9d71f42dec6b4fdb1d2ce0aa5c97bc71"
+        }
+      ]
+    },
+    {
+      "name": "releaseVariantReleaseSourcePublication",
+      "attributes": {
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.docstype": "sources",
+        "org.gradle.usage": "java-runtime"
+      },
+      "files": [
+        {
+          "name": "ads-mallegan-lib-nvc-1.0.0-sources.jar",
+          "url": "ads-mallegan-lib-nvc-1.0.0-sources.jar",
+          "size": 58711,
+          "sha512": "698db227a5b2c63d846f2d8d82692c83f541897ab35bf94af260de7cfe221b653b38deb383b6d59650a4685814468944cc0aa81f9da810e7806710119e7a7b93",
+          "sha256": "79f5b07244e9bd62ce3a74af2e30f5266a815d40926b5d4ad0556c87821392d3",
+          "sha1": "5a5bf9c0d270b6da7705827d143ba121d585c012",
+          "md5": "a28f4e49ce4cce175e48349a843ef24a"
+        }
+      ]
+    }
+  ]
+}

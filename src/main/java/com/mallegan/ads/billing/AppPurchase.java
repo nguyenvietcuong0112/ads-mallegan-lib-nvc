@@ -14,6 +14,8 @@ import androidx.annotation.NonNull;
 import com.android.billingclient.api.ProductDetails;
 import com.android.billingclient.api.ProductDetailsResponseListener;
 import com.android.billingclient.api.QueryProductDetailsParams;
+import com.android.billingclient.api.QueryProductDetailsResult;
+import com.android.billingclient.api.PendingPurchasesParams;
 import com.android.billingclient.api.QueryPurchasesParams;
 import com.mallegan.ads.callback.BillingListener;
 import com.mallegan.ads.callback.PurchaseListioner;
@@ -238,11 +240,12 @@ public class AppPurchase {
 
                     billingClient.queryProductDetailsAsync(params, new ProductDetailsResponseListener() {
                                 @Override
-                                public void onProductDetailsResponse(@NonNull BillingResult billingResult, @NonNull List<ProductDetails> list) {
-                                    Log.d(TAG, "onSkuSubsDetailsResponse: " + list.size());
+                                public void onProductDetailsResponse(@NonNull BillingResult billingResult, @NonNull QueryProductDetailsResult result) {
+                                    List<ProductDetails> list = result.getProductDetailsList();
+                                    Log.d(TAG, "onSkuSubsDetailsResponse: " + (list != null ? list.size() : 0));
                                     skuListSubsFromStore = list;
                                     isListGot = true;
-                                    addSkuINAPToMap(list);
+                                    addSkuINAPToMap(list != null ? list : new ArrayList<>());
                                 }
                             }
                     );
@@ -264,11 +267,12 @@ public class AppPurchase {
 
                     billingClient.queryProductDetailsAsync(paramsSub, new ProductDetailsResponseListener() {
                                 @Override
-                                public void onProductDetailsResponse(@NonNull BillingResult billingResult, @NonNull List<ProductDetails> list) {
-                                    Log.d(TAG, "onSkuSubsDetailsResponse: " + list.size());
+                                public void onProductDetailsResponse(@NonNull BillingResult billingResult, @NonNull QueryProductDetailsResult result) {
+                                    List<ProductDetails> list = result.getProductDetailsList();
+                                    Log.d(TAG, "onSkuSubsDetailsResponse: " + (list != null ? list.size() : 0));
                                     skuListSubsFromStore = list;
                                     isListGot = true;
-                                    addSkuSubsToMap(list);
+                                    addSkuSubsToMap(list != null ? list : new ArrayList<>());
                                 }
                             }
                     );
@@ -328,7 +332,9 @@ public class AppPurchase {
 //            listINAPId.add(PRODUCT_ID_TEST);
 //        }
         billingClient = BillingClient.newBuilder(application)
-                .enablePendingPurchases()
+                .enablePendingPurchases(PendingPurchasesParams.newBuilder()
+                        .enableOneTimeProducts()
+                        .build())
                 .setListener(purchasesUpdatedListener)
                 .build();
 

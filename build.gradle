@@ -61,8 +61,9 @@ dependencies {
     implementation 'com.google.guava:guava:33.1.0-android'
     implementation 'com.facebook.android:facebook-android-sdk:18.2.3'
     implementation 'com.airbnb.android:lottie:6.7.1'
-    implementation 'com.appsflyer:af-android-sdk:7.0.0'
+    implementation 'com.appsflyer:af-android-sdk:6.18.0'
     implementation 'com.adjust.sdk:adjust-android:5.7.0'
+    implementation 'com.android.installreferrer:installreferrer:2.2'
 
     implementation platform('com.google.firebase:firebase-bom:34.13.0')
     implementation 'com.google.firebase:firebase-analytics'
