@@ -16,6 +16,9 @@ public abstract class AdsMultiDexApplication extends MultiDexApplication {
         if (enableAdsResume()) {
             AppOpenManager.getInstance().init(this, getOpenAppAdId());
         }
+        if (enableAdjustTracking()) {
+            Adjust.getInstance().init(this, getAdjustToken());
+        }
     }
 
     public abstract boolean enableAdsResume();
