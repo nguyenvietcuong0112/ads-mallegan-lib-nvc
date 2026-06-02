@@ -55,6 +55,8 @@ object AdjustHelper : Application.ActivityLifecycleCallbacks {
         // Các callback hỗ trợ ghi nhận kết quả và debug
         config.setOnAttributionChangedListener { attribution ->
             Log.d(TAG, "Attribution changed: TrackerToken = ${attribution.trackerToken}, Network = ${attribution.network}, Campaign = ${attribution.campaign}")
+            val isOrganic = attribution.network?.lowercase()?.contains("organic") == true
+            PreferenceManager.getInstance().putBoolean("is_admob_network_full_ads", !isOrganic)
         }
 
         config.setOnSessionTrackingSucceededListener { sessionSuccess ->
@@ -70,6 +72,7 @@ object AdjustHelper : Application.ActivityLifecycleCallbacks {
 
         // Đăng ký lifecycle tự động gọi Adjust.onResume() và Adjust.onPause()
         application.registerActivityLifecycleCallbacks(this)
+        PreferenceManager.getInstance().putBoolean("is_admob_network_full_ads", true)
         Log.d(TAG, "Adjust SDK initialized in ${if (isDebug) "SANDBOX" else "PRODUCTION"} mode.")
     }
 
