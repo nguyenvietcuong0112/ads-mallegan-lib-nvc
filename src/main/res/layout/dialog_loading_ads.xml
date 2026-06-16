@@ -15,11 +15,10 @@
 <!--        app:SpinKit_Color="#515151" />-->
     <com.airbnb.lottie.LottieAnimationView
         android:id="@+id/ic_loading"
-        android:layout_width="@dimen/_100sdp"
-        android:layout_height="@dimen/_100sdp"
+        android:layout_width="@dimen/_150sdp"
+        android:layout_height="@dimen/_150sdp"
         android:layout_centerInParent="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="@dimen/_12sdp"
         app:lottie_autoPlay="true"
         app:lottie_loop="true"
         app:lottie_rawRes="@raw/loading" />
