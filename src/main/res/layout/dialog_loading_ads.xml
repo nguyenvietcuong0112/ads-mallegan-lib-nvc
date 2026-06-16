@@ -29,7 +29,6 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/ic_loading"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="@dimen/_20sdp"
         android:gravity="right"
         android:text="@string/loading_ads"
         android:textSize="@dimen/_13sdp" />
