@@ -13,18 +13,16 @@
 <!--        android:layout_height="wrap_content"-->
 <!--        android:layout_gravity="center"-->
 <!--        app:SpinKit_Color="#515151" />-->
-    <androidx.core.widget.ContentLoadingProgressBar
+    <com.airbnb.lottie.LottieAnimationView
         android:id="@+id/ic_loading"
-        style="@style/Widget.AppCompat.ProgressBar"
+        android:layout_width="@dimen/_100sdp"
+        android:layout_height="@dimen/_100sdp"
         android:layout_centerInParent="true"
-        android:layout_gravity="center"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:indeterminate="true"
-        android:indeterminateTint="#515151"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="@dimen/_12sdp"
-        android:visibility="visible" />
+        app:lottie_autoPlay="true"
+        app:lottie_loop="true"
+        app:lottie_rawRes="@raw/loading" />
 
     <TextView
         android:layout_width="wrap_content"
