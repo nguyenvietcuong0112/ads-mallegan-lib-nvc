@@ -105,8 +105,6 @@ class AdmobCore {
     private long currentTimeShowAds;
 
 
-
-
     void initAdmob(Context context, List<String> testDeviceList) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
             String processName = Application.getProcessName();
@@ -419,8 +417,8 @@ class AdmobCore {
                             Log.d(TAG, "OnPaidEvent banner:" + adValue.getValueMicros());
 
                             FirebaseUtil.logPaidAdImpression(context,
-                                adValue,
-                                adView.getAdUnitId(), AdType.BANNER);
+                                    adValue,
+                                    adView.getAdUnitId(), AdType.BANNER);
                         });
                     }
                 }
@@ -483,8 +481,8 @@ class AdmobCore {
                         Log.d(TAG, "OnPaidEvent banner:" + adValue.getValueMicros());
 
                         FirebaseUtil.logPaidAdImpression(context,
-                            adValue,
-                            adView.getAdUnitId(), AdType.BANNER);
+                                adValue,
+                                adView.getAdUnitId(), AdType.BANNER);
                     });
 
                 }
@@ -639,14 +637,14 @@ class AdmobCore {
                         }
                         if (interstitialAd != null) {
                             interstitialAd.setOnPaidEventListener(adValue -> {
-                                if (adValue.getValueMicros() == 0L ) {
+                                if (adValue.getValueMicros() == 0L) {
                                     PreferenceManager.getInstance().putBoolean("is_admob_network_full_ads", false);
                                 }
 
                                 Log.d(TAG, "OnPaidEvent loadInterstitialAds:" + adValue.getValueMicros());
                                 FirebaseUtil.logPaidAdImpression(context,
-                                    adValue,
-                                    interstitialAd.getAdUnitId(), AdType.BANNER);
+                                        adValue,
+                                        interstitialAd.getAdUnitId(), AdType.BANNER);
                             });
                         }
                     }
@@ -706,7 +704,7 @@ class AdmobCore {
                             AppOpenManager.getInstance().disableAppResume();
                             onShowSplash((Activity) context, adListener);
                             interstitialAd.setOnPaidEventListener(adValue -> {
-                                if (adValue.getValueMicros() == 0L ) {
+                                if (adValue.getValueMicros() == 0L) {
                                     PreferenceManager.getInstance().putBoolean("is_admob_network_full_ads", false);
                                 }
                             });
@@ -757,41 +755,41 @@ class AdmobCore {
                     @Override
                     public void run() {
                         InterstitialAd.load(context, listID.get(0), getAdRequest(),
-                            new InterstitialAdLoadCallback() {
-                                @Override
-                                public void onAdLoaded(@NonNull InterstitialAd interstitialAd) {
-                                    super.onAdLoaded(interstitialAd);
-                                    mInterstitialSplash = interstitialAd;
-                                    AppOpenManager.getInstance().disableAppResume();
-                                    onShowSplash((Activity) context, adListener);
-                                    //tracking adjust
-                                    interstitialAd.setOnPaidEventListener(adValue -> {
-                                        if (adValue.getValueMicros() == 0L ) {
-                                            PreferenceManager.getInstance().putBoolean("is_admob_network_full_ads", false);
-                                        }
-                                        Log.d(TAG, "OnPaidEvent getInterstitalAds:" + adValue.getValueMicros());
-                                        FirebaseUtil.logPaidAdImpression(context,
-                                            adValue,
-                                            interstitialAd.getAdUnitId(), AdType.INTERSTITIAL);
-                                        adListener.onEarnRevenue((double) adValue.getValueMicros());
-                                    });
-                                }
-
-                                @Override
-                                public void onAdFailedToLoad(@NonNull LoadAdError loadAdError) {
-                                    super.onAdFailedToLoad(loadAdError);
-                                    listID.remove(0);
-                                    if (listID.size() == 0) {
-                                        mInterstitialSplash = null;
-                                        adListener.onAdFailedToLoad(loadAdError);
-                                        adListener.onNextAction();
-                                    } else {
-                                        loadSplashInterAdsFloor(context, listID, 100, adListener);
+                                new InterstitialAdLoadCallback() {
+                                    @Override
+                                    public void onAdLoaded(@NonNull InterstitialAd interstitialAd) {
+                                        super.onAdLoaded(interstitialAd);
+                                        mInterstitialSplash = interstitialAd;
+                                        AppOpenManager.getInstance().disableAppResume();
+                                        onShowSplash((Activity) context, adListener);
+                                        //tracking adjust
+                                        interstitialAd.setOnPaidEventListener(adValue -> {
+                                            if (adValue.getValueMicros() == 0L) {
+                                                PreferenceManager.getInstance().putBoolean("is_admob_network_full_ads", false);
+                                            }
+                                            Log.d(TAG, "OnPaidEvent getInterstitalAds:" + adValue.getValueMicros());
+                                            FirebaseUtil.logPaidAdImpression(context,
+                                                    adValue,
+                                                    interstitialAd.getAdUnitId(), AdType.INTERSTITIAL);
+                                            adListener.onEarnRevenue((double) adValue.getValueMicros());
+                                        });
                                     }
 
-                                }
+                                    @Override
+                                    public void onAdFailedToLoad(@NonNull LoadAdError loadAdError) {
+                                        super.onAdFailedToLoad(loadAdError);
+                                        listID.remove(0);
+                                        if (listID.size() == 0) {
+                                            mInterstitialSplash = null;
+                                            adListener.onAdFailedToLoad(loadAdError);
+                                            adListener.onNextAction();
+                                        } else {
+                                            loadSplashInterAdsFloor(context, listID, 100, adListener);
+                                        }
 
-                            });
+                                    }
+
+                                });
                     }
                 }, timeDelay);
             }
@@ -815,8 +813,8 @@ class AdmobCore {
                 mInterstitialSplash.setOnPaidEventListener(adValue -> {
                     Log.d(TAG, "OnPaidEvent splash:" + adValue.getValueMicros());
                     FirebaseUtil.logPaidAdImpression(context,
-                        adValue,
-                        mInterstitialSplash.getAdUnitId(), AdType.INTERSTITIAL);
+                            adValue,
+                            mInterstitialSplash.getAdUnitId(), AdType.INTERSTITIAL);
                     adListener.onEarnRevenue((double) adValue.getValueMicros());
                 });
 
@@ -966,13 +964,13 @@ class AdmobCore {
             return;
         }
         mInterstitialSplash.setOnPaidEventListener(adValue -> {
-            if (adValue.getValueMicros() == 0L ) {
+            if (adValue.getValueMicros() == 0L) {
                 PreferenceManager.getInstance().putBoolean("is_admob_network_full_ads", false);
             }
             Log.d(TAG, "OnPaidEvent splash:" + adValue.getValueMicros());
             FirebaseUtil.logPaidAdImpression(context,
-                adValue,
-                mInterstitialSplash.getAdUnitId(), AdType.INTERSTITIAL);
+                    adValue,
+                    mInterstitialSplash.getAdUnitId(), AdType.INTERSTITIAL);
             adListener.onEarnRevenue((double) adValue.getValueMicros());
         });
 
@@ -1138,36 +1136,36 @@ class AdmobCore {
             isTimeout = false;
             interstitialAd = null;
             InterstitialAd.load(context, id, getAdRequest(),
-                new InterstitialAdLoadCallback() {
-                    @Override
-                    public void onAdLoaded(@NonNull InterstitialAd interstitialAd) {
-                        if (adCallback != null) {
-                            adCallback.onInterstitialLoad(interstitialAd);
+                    new InterstitialAdLoadCallback() {
+                        @Override
+                        public void onAdLoaded(@NonNull InterstitialAd interstitialAd) {
+                            if (adCallback != null) {
+                                adCallback.onInterstitialLoad(interstitialAd);
+                            }
+
+                            //tracking adjust
+                            interstitialAd.setOnPaidEventListener(adValue -> {
+                                if (adValue.getValueMicros() == 0L) {
+                                    PreferenceManager.getInstance().putBoolean("is_admob_network_full_ads", false);
+                                }
+                                Log.d(TAG, "OnPaidEvent getInterstitalAds:" + adValue.getValueMicros());
+                                FirebaseUtil.logPaidAdImpression(context,
+                                        adValue,
+                                        interstitialAd.getAdUnitId(), AdType.INTERSTITIAL);
+                                adCallback.onEarnRevenue((double) adValue.getValueMicros());
+                            });
                         }
 
-                        //tracking adjust
-                        interstitialAd.setOnPaidEventListener(adValue -> {
-                            if (adValue.getValueMicros() == 0L ) {
-                                PreferenceManager.getInstance().putBoolean("is_admob_network_full_ads", false);
-                            }
-                            Log.d(TAG, "OnPaidEvent getInterstitalAds:" + adValue.getValueMicros());
-                            FirebaseUtil.logPaidAdImpression(context,
-                                adValue,
-                                interstitialAd.getAdUnitId(), AdType.INTERSTITIAL);
-                            adCallback.onEarnRevenue((double) adValue.getValueMicros());
-                        });
-                    }
+                        @Override
+                        public void onAdFailedToLoad(@NonNull LoadAdError loadAdError) {
+                            // Handle the error
+                            Log.i(TAG, loadAdError.getMessage());
+                            if (adCallback != null)
+                                adCallback.onAdFailedToLoad(loadAdError);
+                            adCallback.onNextAction();
+                        }
 
-                    @Override
-                    public void onAdFailedToLoad(@NonNull LoadAdError loadAdError) {
-                        // Handle the error
-                        Log.i(TAG, loadAdError.getMessage());
-                        if (adCallback != null)
-                            adCallback.onAdFailedToLoad(loadAdError);
-                        adCallback.onNextAction();
-                    }
-
-                });
+                    });
         }
     }
 
@@ -1337,6 +1335,7 @@ class AdmobCore {
             callback.onNextAction();
         }
     }
+
     /**
      * Show ads inter noti
      */
@@ -1775,9 +1774,9 @@ class AdmobCore {
 
                     Log.d(TAG, "OnPaidEvent Reward:" + adValue.getValueMicros());
                     FirebaseUtil.logPaidAdImpression(context,
-                        adValue,
-                        rewardedAd.getAdUnitId(),
-                        AdType.REWARDED);
+                            adValue,
+                            rewardedAd.getAdUnitId(),
+                            AdType.REWARDED);
                 });
             }
 
@@ -1804,50 +1803,50 @@ class AdmobCore {
         if (isShowNative) {
             if (isNetworkConnected()) {
                 VideoOptions videoOptions = new VideoOptions.Builder()
-                    .setStartMuted(true)
-                    .build();
+                        .setStartMuted(true)
+                        .build();
 
                 NativeAdOptions adOptions = new NativeAdOptions.Builder()
-                    .setVideoOptions(videoOptions)
-                    .build();
+                        .setVideoOptions(videoOptions)
+                        .build();
                 AdLoader adLoader = new AdLoader.Builder(context, id)
-                    .forNativeAd(nativeAd -> {
-                        callback.onNativeAdLoaded(nativeAd);
-                        nativeAd.setOnPaidEventListener(adValue -> {
-                            if (adValue.getValueMicros() == 0L ) {
-                                PreferenceManager.getInstance().putBoolean("is_admob_network_full_ads", false);
+                        .forNativeAd(nativeAd -> {
+                            callback.onNativeAdLoaded(nativeAd);
+                            nativeAd.setOnPaidEventListener(adValue -> {
+                                if (adValue.getValueMicros() == 0L) {
+                                    PreferenceManager.getInstance().putBoolean("is_admob_network_full_ads", false);
+                                }
+                                Log.d(TAG, "OnPaidEvent getInterstitalAds:" + adValue.getValueMicros());
+                                FirebaseUtil.logPaidAdImpression(context,
+                                        adValue,
+                                        id,
+                                        AdType.NATIVE);
+                                callback.onEarnRevenue((double) adValue.getValueMicros());
+                            });
+                        })
+                        .withAdListener(new AdListener() {
+                            @Override
+                            public void onAdFailedToLoad(LoadAdError error) {
+                                Log.e(TAG, "NativeAd onAdFailedToLoad: " + error.getMessage());
+                                callback.onAdFailedToLoad();
                             }
-                            Log.d(TAG, "OnPaidEvent getInterstitalAds:" + adValue.getValueMicros());
-                            FirebaseUtil.logPaidAdImpression(context,
-                                adValue,
-                                id,
-                                AdType.NATIVE);
-                            callback.onEarnRevenue((double) adValue.getValueMicros());
-                        });
-                    })
-                    .withAdListener(new AdListener() {
-                        @Override
-                        public void onAdFailedToLoad(LoadAdError error) {
-                            Log.e(TAG, "NativeAd onAdFailedToLoad: " + error.getMessage());
-                            callback.onAdFailedToLoad();
-                        }
 
-                        @Override
-                        public void onAdClicked() {
-                            super.onAdClicked();
-                            if (disableAdResumeWhenClickAds)
-                                AppOpenManager.getInstance().disableAdResumeByClickAction();
-                            FirebaseUtil.logClickAdsEvent(context, id);
-                            if (Admob.timeLimitAds > 1000) {
-                                setTimeLimitNative();
-                                if (callback != null) {
-                                    callback.onAdFailedToLoad();
+                            @Override
+                            public void onAdClicked() {
+                                super.onAdClicked();
+                                if (disableAdResumeWhenClickAds)
+                                    AppOpenManager.getInstance().disableAdResumeByClickAction();
+                                FirebaseUtil.logClickAdsEvent(context, id);
+                                if (Admob.timeLimitAds > 1000) {
+                                    setTimeLimitNative();
+                                    if (callback != null) {
+                                        callback.onAdFailedToLoad();
+                                    }
                                 }
                             }
-                        }
-                    })
-                    .withNativeAdOptions(adOptions)
-                    .build();
+                        })
+                        .withNativeAdOptions(adOptions)
+                        .build();
                 adLoader.loadAd(getAdRequest());
             } else {
                 callback.onAdFailedToLoad();
@@ -1865,60 +1864,60 @@ class AdmobCore {
         if (isShowNative) {
             if (isNetworkConnected()) {
                 VideoOptions videoOptions = new VideoOptions.Builder()
-                    .setStartMuted(true)
-                    .build();
+                        .setStartMuted(true)
+                        .build();
 
                 NativeAdOptions adOptions = new NativeAdOptions.Builder()
-                    .setVideoOptions(videoOptions)
-                    .build();
+                        .setVideoOptions(videoOptions)
+                        .build();
                 AdLoader adLoader = new AdLoader.Builder(context, id)
-                    .forNativeAd(new NativeAd.OnNativeAdLoadedListener() {
+                        .forNativeAd(new NativeAd.OnNativeAdLoadedListener() {
 
-                        @Override
-                        public void onNativeAdLoaded(@NonNull NativeAd nativeAd) {
-                            if (context instanceof Activity) {
-                                if (((Activity) context).isFinishing() || ((Activity) context).isFinishing() || ((Activity) context).isChangingConfigurations()) {
-                                    nativeAd.destroy();
-                                    return;
+                            @Override
+                            public void onNativeAdLoaded(@NonNull NativeAd nativeAd) {
+                                if (context instanceof Activity) {
+                                    if (((Activity) context).isFinishing() || ((Activity) context).isFinishing() || ((Activity) context).isChangingConfigurations()) {
+                                        nativeAd.destroy();
+                                        return;
+                                    }
+                                }
+                                callback.onNativeAdLoaded(nativeAd);
+                                nativeAd.setOnPaidEventListener(adValue -> {
+                                    if (adValue.getValueMicros() == 0L) {
+                                        PreferenceManager.getInstance().putBoolean("is_admob_network_full_ads", false);
+                                    }
+                                    Log.d(TAG, "OnPaidEvent getInterstitalAds:" + adValue.getValueMicros());
+                                    FirebaseUtil.logPaidAdImpression(context,
+                                            adValue,
+                                            id,
+                                            AdType.NATIVE);
+                                    callback.onEarnRevenue((double) adValue.getValueMicros());
+                                });
+                            }
+                        })
+                        .withAdListener(new AdListener() {
+                            @Override
+                            public void onAdFailedToLoad(LoadAdError error) {
+                                Log.e(TAG, "NativeAd onAdFailedToLoad: " + error.getMessage());
+                                callback.onAdFailedToLoad();
+                            }
+
+                            @Override
+                            public void onAdClicked() {
+                                super.onAdClicked();
+                                if (disableAdResumeWhenClickAds)
+                                    AppOpenManager.getInstance().disableAdResumeByClickAction();
+                                FirebaseUtil.logClickAdsEvent(context, id);
+                                if (Admob.timeLimitAds > 1000) {
+                                    setTimeLimitNative();
+                                    if (callback != null) {
+                                        callback.onAdFailedToLoad();
+                                    }
                                 }
                             }
-                            callback.onNativeAdLoaded(nativeAd);
-                            nativeAd.setOnPaidEventListener(adValue -> {
-                                if (adValue.getValueMicros() == 0L ) {
-                                    PreferenceManager.getInstance().putBoolean("is_admob_network_full_ads", false);
-                                }
-                                Log.d(TAG, "OnPaidEvent getInterstitalAds:" + adValue.getValueMicros());
-                                FirebaseUtil.logPaidAdImpression(context,
-                                    adValue,
-                                    id,
-                                    AdType.NATIVE);
-                                callback.onEarnRevenue((double) adValue.getValueMicros());
-                            });
-                        }
-                    })
-                    .withAdListener(new AdListener() {
-                        @Override
-                        public void onAdFailedToLoad(LoadAdError error) {
-                            Log.e(TAG, "NativeAd onAdFailedToLoad: " + error.getMessage());
-                            callback.onAdFailedToLoad();
-                        }
-
-                        @Override
-                        public void onAdClicked() {
-                            super.onAdClicked();
-                            if (disableAdResumeWhenClickAds)
-                                AppOpenManager.getInstance().disableAdResumeByClickAction();
-                            FirebaseUtil.logClickAdsEvent(context, id);
-                            if (Admob.timeLimitAds > 1000) {
-                                setTimeLimitNative();
-                                if (callback != null) {
-                                    callback.onAdFailedToLoad();
-                                }
-                            }
-                        }
-                    })
-                    .withNativeAdOptions(adOptions)
-                    .build();
+                        })
+                        .withNativeAdOptions(adOptions)
+                        .build();
                 adLoader.loadAds(getAdRequest(), numsOfAds);
             } else {
                 callback.onAdFailedToLoad();
@@ -1949,14 +1948,14 @@ class AdmobCore {
                     }
                     callback.onNativeAdLoaded(nativeAd);
                     nativeAd.setOnPaidEventListener(adValue -> {
-                        if (adValue.getValueMicros() == 0L ) {
+                        if (adValue.getValueMicros() == 0L) {
                             PreferenceManager.getInstance().putBoolean("is_admob_network_full_ads", false);
                         }
                         Log.d(TAG, "OnPaidEvent getInterstitalAds:" + adValue.getValueMicros());
                         FirebaseUtil.logPaidAdImpression(context,
-                            adValue,
-                            listID.get(0),
-                            AdType.NATIVE);
+                                adValue,
+                                listID.get(0),
+                                AdType.NATIVE);
                         callback.onEarnRevenue((double) adValue.getValueMicros());
                     });
                 }
@@ -2055,60 +2054,60 @@ class AdmobCore {
         containerShimmer.startShimmer();
 
         VideoOptions videoOptions = new VideoOptions.Builder()
-            .setStartMuted(true)
-            .build();
+                .setStartMuted(true)
+                .build();
 
         NativeAdOptions adOptions = new NativeAdOptions.Builder()
-            .setVideoOptions(videoOptions)
-            .build();
+                .setVideoOptions(videoOptions)
+                .build();
 
 
         AdLoader adLoader = new AdLoader.Builder(context, id)
-            .forNativeAd(new NativeAd.OnNativeAdLoadedListener() {
-                @Override
-                public void onNativeAdLoaded(@NonNull NativeAd nativeAd) {
-                    containerShimmer.stopShimmer();
-                    containerShimmer.setVisibility(View.GONE);
-                    frameLayout.setVisibility(View.VISIBLE);
-                    @SuppressLint("InflateParams") NativeAdView adView = (NativeAdView) LayoutInflater.from(context)
-                        .inflate(layout, null);
-                    pushAdsToViewCustom(nativeAd, adView);
-                    frameLayout.removeAllViews();
-                    frameLayout.addView(adView);
-                    nativeAd.setOnPaidEventListener(adValue -> {
-                        if (adValue.getValueMicros() == 0L ) {
-                            PreferenceManager.getInstance().putBoolean("is_admob_network_full_ads", false);
-                        }
-                        Log.d(TAG, "OnPaidEvent getInterstitalAds:" + adValue.getValueMicros());
-                        FirebaseUtil.logPaidAdImpression(context,
-                            adValue,
-                            id,
-                            AdType.NATIVE);
-                    });
-                }
+                .forNativeAd(new NativeAd.OnNativeAdLoadedListener() {
+                    @Override
+                    public void onNativeAdLoaded(@NonNull NativeAd nativeAd) {
+                        containerShimmer.stopShimmer();
+                        containerShimmer.setVisibility(View.GONE);
+                        frameLayout.setVisibility(View.VISIBLE);
+                        @SuppressLint("InflateParams") NativeAdView adView = (NativeAdView) LayoutInflater.from(context)
+                                .inflate(layout, null);
+                        pushAdsToViewCustom(nativeAd, adView);
+                        frameLayout.removeAllViews();
+                        frameLayout.addView(adView);
+                        nativeAd.setOnPaidEventListener(adValue -> {
+                            if (adValue.getValueMicros() == 0L) {
+                                PreferenceManager.getInstance().putBoolean("is_admob_network_full_ads", false);
+                            }
+                            Log.d(TAG, "OnPaidEvent getInterstitalAds:" + adValue.getValueMicros());
+                            FirebaseUtil.logPaidAdImpression(context,
+                                    adValue,
+                                    id,
+                                    AdType.NATIVE);
+                        });
+                    }
 
 
-            })
-            .withAdListener(new AdListener() {
-                @Override
-                public void onAdFailedToLoad(LoadAdError error) {
-                    Log.e(TAG, "onAdFailedToLoad: " + error.getMessage());
-                    containerShimmer.stopShimmer();
-                    containerShimmer.setVisibility(View.GONE);
-                    frameLayout.setVisibility(View.GONE);
-                }
+                })
+                .withAdListener(new AdListener() {
+                    @Override
+                    public void onAdFailedToLoad(LoadAdError error) {
+                        Log.e(TAG, "onAdFailedToLoad: " + error.getMessage());
+                        containerShimmer.stopShimmer();
+                        containerShimmer.setVisibility(View.GONE);
+                        frameLayout.setVisibility(View.GONE);
+                    }
 
-                @Override
-                public void onAdClicked() {
-                    super.onAdClicked();
-                    if (disableAdResumeWhenClickAds)
-                        AppOpenManager.getInstance().disableAdResumeByClickAction();
-                    FirebaseUtil.logClickAdsEvent(context, id);
-                }
+                    @Override
+                    public void onAdClicked() {
+                        super.onAdClicked();
+                        if (disableAdResumeWhenClickAds)
+                            AppOpenManager.getInstance().disableAdResumeByClickAction();
+                        FirebaseUtil.logClickAdsEvent(context, id);
+                    }
 
-            })
-            .withNativeAdOptions(adOptions)
-            .build();
+                })
+                .withNativeAdOptions(adOptions)
+                .build();
 
         adLoader.loadAd(getAdRequest());
     }
@@ -2134,7 +2133,7 @@ class AdmobCore {
     @SuppressLint("HardwareIds")
     String getDeviceId(Activity activity) {
         String android_id = Settings.Secure.getString(activity.getContentResolver(),
-            Settings.Secure.ANDROID_ID);
+                Settings.Secure.ANDROID_ID);
         return md5(android_id).toUpperCase();
     }
 
@@ -2142,7 +2141,7 @@ class AdmobCore {
         try {
             // Create MD5 Hash
             MessageDigest digest = java.security.MessageDigest
-                .getInstance("MD5");
+                    .getInstance("MD5");
             digest.update(s.getBytes());
             byte messageDigest[] = digest.digest();
 
@@ -2265,7 +2264,7 @@ class AdmobCore {
                             AppOpenManager.getInstance().disableAppResume();
                             onShowSplash2((Activity) context, adListener);
                             interstitialAd.setOnPaidEventListener(adValue -> {
-                                if (adValue.getValueMicros() == 0L ) {
+                                if (adValue.getValueMicros() == 0L) {
                                     PreferenceManager.getInstance().putBoolean("is_admob_network_full_ads", false);
                                 }
                             });
@@ -2296,7 +2295,7 @@ class AdmobCore {
             return;
         }
         mInterstitialSplash.setOnPaidEventListener(adValue -> {
-            if (adValue.getValueMicros() == 0L ) {
+            if (adValue.getValueMicros() == 0L) {
                 PreferenceManager.getInstance().putBoolean("is_admob_network_full_ads", false);
             }
             Log.d(TAG, "OnPaidEvent splash:" + adValue.getValueMicros());
@@ -2501,9 +2500,6 @@ class AdmobCore {
             }
         });
     }
-
-
-
 
 
 }
