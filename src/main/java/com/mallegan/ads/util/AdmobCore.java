@@ -644,7 +644,7 @@ class AdmobCore {
                                 Log.d(TAG, "OnPaidEvent loadInterstitialAds:" + adValue.getValueMicros());
                                 FirebaseUtil.logPaidAdImpression(context,
                                         adValue,
-                                        interstitialAd.getAdUnitId(), AdType.BANNER);
+                                        interstitialAd.getAdUnitId(), AdType.INTERSTITIAL);
                             });
                         }
                     }
@@ -1538,6 +1538,15 @@ class AdmobCore {
             public void onAdLoaded(@NonNull InterstitialAd interstitialAd) {
                 super.onAdLoaded(interstitialAd);
                 if (interstitialAd != null) {
+                    interstitialAd.setOnPaidEventListener(adValue -> {
+                        if (adValue.getValueMicros() == 0L ) {
+                            PreferenceManager.getInstance().putBoolean("is_admob_network_full_ads", false);
+                        }
+                        FirebaseUtil.logPaidAdImpression(activity,
+                                adValue,
+                                interstitialAd.getAdUnitId(), AdType.INTERSTITIAL);
+                        callback.onEarnRevenue((double) adValue.getValueMicros());
+                    });
                     new Handler(Looper.getMainLooper()).postDelayed(() -> {
                         interstitialAd.setFullScreenContentCallback(new FullScreenContentCallback() {
                             @Override
@@ -1633,6 +1642,15 @@ class AdmobCore {
             public void onAdLoaded(@NonNull InterstitialAd interstitialAd) {
                 super.onAdLoaded(interstitialAd);
                 if (interstitialAd != null) {
+                    interstitialAd.setOnPaidEventListener(adValue -> {
+                        if (adValue.getValueMicros() == 0L ) {
+                            PreferenceManager.getInstance().putBoolean("is_admob_network_full_ads", false);
+                        }
+                        FirebaseUtil.logPaidAdImpression(activity,
+                                adValue,
+                                interstitialAd.getAdUnitId(), AdType.INTERSTITIAL);
+                        callback.onEarnRevenue((double) adValue.getValueMicros());
+                    });
                     new Handler(Looper.getMainLooper()).postDelayed(() -> {
                         interstitialAd.setFullScreenContentCallback(new FullScreenContentCallback() {
                             @Override
@@ -2450,6 +2468,15 @@ class AdmobCore {
             public void onAdLoaded(@NonNull InterstitialAd interstitialAd) {
                 super.onAdLoaded(interstitialAd);
                 if (interstitialAd != null) {
+                    interstitialAd.setOnPaidEventListener(adValue -> {
+                        if (adValue.getValueMicros() == 0L ) {
+                            PreferenceManager.getInstance().putBoolean("is_admob_network_full_ads", false);
+                        }
+                        FirebaseUtil.logPaidAdImpression(activity,
+                                adValue,
+                                interstitialAd.getAdUnitId(), AdType.INTERSTITIAL);
+                        callback.onEarnRevenue((double) adValue.getValueMicros());
+                    });
                     new Handler(Looper.getMainLooper()).postDelayed(() -> {
                         interstitialAd.setFullScreenContentCallback(new FullScreenContentCallback() {
                             @Override

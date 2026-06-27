@@ -34,17 +34,18 @@ public class FirebaseUtil {
         logEventWithAds(context, (float) adValue.getValueMicros(), adValue.getPrecisionType(), adUnitId, adType.toString(), adValue.getCurrencyCode());
     }
 
-    private static void logEventWithAds(Context context, float revenue, int precision, String adUnitId, String network, String mediationProvider) {
+    private static void logEventWithAds(Context context, float revenue, int precision, String adUnitId, String network, String currency) {
         Log.d(TAG, String.format(
-            "Paid event of value %.0f microcents in currency USD of precision %s%n occurred for ad unit %s from ad network %s.mediation provider: %s%n",
+            "Paid event of value %.0f microcents in currency %s of precision %s%n occurred for ad unit %s from ad network %s.%n",
             revenue,
+            currency,
             precision,
             adUnitId,
-            network, mediationProvider));
+            network));
 
         Bundle params = new Bundle(); // Log ad value in micros.
         params.putDouble("valuemicros", revenue);
-        params.putString("currency", "USD");
+        params.putString("currency", currency);
         // These values below won’t be used in ROAS recipe.
         // But log for purposes of debugging and future reference.
         params.putInt("precision", precision);
@@ -52,7 +53,7 @@ public class FirebaseUtil {
         params.putString("network", network);
 
         // log revenue this ad
-        logPaidAdImpressionValue(context, revenue / 1000000.0, precision, adUnitId, network, mediationProvider);
+        logPaidAdImpressionValue(context, revenue / 1000000.0, precision, adUnitId, network, currency);
         FirebaseAnalyticsUtil.logEventWithAds(context, params);
         FacebookEventUtils.logEventWithAds(context, params);
         // update current tota
@@ -67,10 +68,10 @@ public class FirebaseUtil {
 
     }
 
-    private static void logPaidAdImpressionValue(Context context, double value, int precision, String adunitid, String network, String mediationProvider) {
+    private static void logPaidAdImpressionValue(Context context, double value, int precision, String adunitid, String network, String currency) {
         Bundle params = new Bundle();
         params.putDouble("value", value);
-        params.putString("currency", "USD");
+        params.putString("currency", currency);
         params.putInt("precision", precision);
         params.putString("adunitid", adunitid);
         params.putString("network", network);
