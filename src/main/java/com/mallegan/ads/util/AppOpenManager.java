@@ -223,6 +223,10 @@ public class AppOpenManager implements Application.ActivityLifecycleCallbacks, L
                     if (!isSplash) {
                         AppOpenManager.this.appResumeAd = ad;
                         AppOpenManager.this.appResumeAd.setOnPaidEventListener(adValue -> {
+                            FirebaseUtil.logPaidAdImpression(myApplication.getApplicationContext(),
+                                adValue,
+                                ad.getAdUnitId(),
+                                AdType.APP_OPEN);
                         });
                         AppOpenManager.this.appResumeLoadTime = (new Date()).getTime();
                     } else {
@@ -808,9 +812,6 @@ public class AppOpenManager implements Application.ActivityLifecycleCallbacks, L
                         super.onAdLoaded(appOpenAd);
                         handler.removeCallbacks(timeOutRunnable);
                         AppOpenManager.this.splashAd = appOpenAd;
-                        AppOpenManager.this.splashAd.setOnPaidEventListener((adValue) -> {
-                            //log value
-                        });
                         appOpenAd.setOnPaidEventListener(adValue -> {
                             if (adValue.getValueMicros() == 0L ) {
                                 PreferenceManager.getInstance().putBoolean("is_admob_network_full_ads", false);
