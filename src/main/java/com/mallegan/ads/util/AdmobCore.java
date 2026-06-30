@@ -634,6 +634,7 @@ class AdmobCore {
                                 onShowSplash((Activity) context, adListener);
                                 Log.i(TAG, "loadSplashInterstitalAds:show ad on loaded ");
                             }
+                            adListener.onInterstitialLoad(interstitialAd);
                         }
                         if (interstitialAd != null) {
                             interstitialAd.setOnPaidEventListener(adValue -> {
@@ -703,10 +704,16 @@ class AdmobCore {
                             mInterstitialSplash = interstitialAd;
                             AppOpenManager.getInstance().disableAppResume();
                             onShowSplash((Activity) context, adListener);
+                            adListener.onInterstitialLoad(interstitialAd);
                             interstitialAd.setOnPaidEventListener(adValue -> {
                                 if (adValue.getValueMicros() == 0L) {
                                     PreferenceManager.getInstance().putBoolean("is_admob_network_full_ads", false);
                                 }
+                                Log.d(TAG, "OnPaidEvent getInterstitalAds:" + adValue.getValueMicros());
+                                FirebaseUtil.logPaidAdImpression(context,
+                                        adValue,
+                                        interstitialAd.getAdUnitId(), AdType.INTERSTITIAL);
+                                adListener.onEarnRevenue((double) adValue.getValueMicros());
                             });
                         }
 
@@ -762,6 +769,7 @@ class AdmobCore {
                                         mInterstitialSplash = interstitialAd;
                                         AppOpenManager.getInstance().disableAppResume();
                                         onShowSplash((Activity) context, adListener);
+                                        adListener.onInterstitialLoad(interstitialAd);
                                         //tracking adjust
                                         interstitialAd.setOnPaidEventListener(adValue -> {
                                             if (adValue.getValueMicros() == 0L) {
@@ -2281,10 +2289,16 @@ class AdmobCore {
                             mInterstitialSplash = interstitialAd;
                             AppOpenManager.getInstance().disableAppResume();
                             onShowSplash2((Activity) context, adListener);
+                            adListener.onInterstitialLoad(interstitialAd);
                             interstitialAd.setOnPaidEventListener(adValue -> {
                                 if (adValue.getValueMicros() == 0L) {
                                     PreferenceManager.getInstance().putBoolean("is_admob_network_full_ads", false);
                                 }
+                                Log.d(TAG, "OnPaidEvent getInterstitalAds:" + adValue.getValueMicros());
+                                FirebaseUtil.logPaidAdImpression(context,
+                                        adValue,
+                                        interstitialAd.getAdUnitId(), AdType.INTERSTITIAL);
+                                adListener.onEarnRevenue((double) adValue.getValueMicros());
                             });
                         }
 
